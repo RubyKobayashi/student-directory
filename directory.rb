@@ -17,8 +17,10 @@ puts "-------------"
 end
 
 def print(students)
-students.each_with_index do |student, index|
-  puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+students.select do |student|
+  if student[:name].start_with?('h')
+  puts student[:name]
+end
 end
 end
 
