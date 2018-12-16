@@ -18,7 +18,7 @@ end
 
 def print(students)
 students.select do |student|
-  if student[:name].start_with?('h')
+  if student[:name].length < 12
   puts student[:name]
 end
 end
