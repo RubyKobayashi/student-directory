@@ -1,3 +1,4 @@
+counter = 0
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -17,12 +18,15 @@ puts "-------------"
 end
 
 def print(students)
-students.select do |student|
-  if student[:name].length < 12
-  puts student[:name]
+  counter = 0
+  while counter < students.length
+    students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    counter += 1
+  end
 end
 end
-end
+
 
 def print_footer(names)
 puts "Overall, we have #{names.count} great students"
