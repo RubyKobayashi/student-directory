@@ -28,7 +28,7 @@ end
 
 def print(students)
     students.each do |student|
-    puts "#{student[:name]} from #{student[:country]}, #{student[:height]} cm tall, (#{student[:cohort]} cohort)"
+    puts "#{student[:name]} from #{student[:country]}, #{student[:height]} cm tall, (#{student[:cohort]} cohort)".center(80, "-")
   end
 end
 
