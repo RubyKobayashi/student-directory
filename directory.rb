@@ -17,10 +17,13 @@ def input_students
    puts "please re-enter the cohort"
    cohort = gets.chomp
    students.last[:cohort] = cohort
+   if cohort.empty?
+   students << {name: name, cohort: :unknown}
    puts "Please enter a name of the student or to finish just hit enter twice"
    name = gets.chomp
    if name.empty?
      break
+end
 end
 end
     puts "Please enter the cohort of the student"
