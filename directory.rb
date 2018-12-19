@@ -1,84 +1,51 @@
-
 def input_students
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return twice"
+  # create an empty array
   students = []
-  puts "If you make a typo, type typo, correct the spelling and press enter"
-  while true do
-  puts "Please enter a name of the student or to finish just hit enter twice"
-  name = gets.strip
-  p name
-  if name.empty?
-    break
-
-  elsif students.empty? && name == "typo"
-    p "please re-enter the name of the student"
-    name = gets.strip
-
-  elsif !students.empty? && name == "typo"
-   puts "please re-enter the cohort"
-   cohort = gets.chomp
-   students.last[:cohort] = cohort
-   puts "Please enter a name of the student or to finish just hit enter twice"
-   name = gets.strip
-   if name.empty?
-     break
-end
-end
-    puts "Please enter the cohort of the student"
-    cohort = gets.strip
-
-    if cohort == "typo"
-      puts "please re-enter the name"
-      name = gets.strip
-      puts "Please enter the cohort of the student"
-      cohort = gets.strip
-      students << {name: name, cohort: cohort}
-      if students.count == 1
-        puts "Now we have 1 student"
-      else
-      puts "Now we have #{students.count} students"
-    end
-    elsif cohort.empty?
-      students << {name: name, cohort: :unknown}
-      else
-    students << {name: name, cohort: cohort}
-    if students.count == 1
-      puts "Now we have 1 student"
-    else
-    puts "Now we have #{students.count} students"
+  # get the first name
+  name = gets .chomp
+  # while the name is not empty, repeat this code
+  while !name.empty? do
+  # add the student hash to the array
+  students << {name: name, cohort: :november}
+  puts "Now we have #{students.count} students"
+  # get another name from the user
+  name = gets.chomp
   end
-
-end
-end
+  # return the array of students
   students
 end
 
-
-
-
-def print_header
-puts "The students of Villains Academy"
-puts "-------------"
+def print_header(students)
+  if students.empty?
+    nil
+  else
+  puts "The students of my cohort at Makers Academy"
+  puts "-------------"
+end
 end
 
 def print(students)
+  if students.empty?
+    puts "You have not entered any students into the directory"
+  else
   students.each do |student|
     puts "#{student[:name]} (#{student[:cohort]} cohort)"
-  end
-end
-
-
-
-
-
-def print_footer(names)
-  if names.count == 1
-    puts "Overall, we have #{names.count} great student"
-  elsif names.count > 1
-    puts "Overall, we have #{names.count} great students"
+ end
 end
 end
+
+def print_footer(students)
+  if students.empty?
+  nil
+else
+  puts "Overall, we have #{students.count} great students"
+end
+end
+
 
 students = input_students
-print_header
+print_header(students)
 print(students)
 print_footer(students)
