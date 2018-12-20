@@ -1,11 +1,11 @@
 @students = []
 
 def print_menu
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
-  puts "9. Exit"
+  puts "1. Input the students
+        2. Show the students
+        3. Save the list to students.csv
+        4. Load the list from students.csv
+        9. Exit"
 end
 
 def interactive_menu
@@ -35,16 +35,15 @@ end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # get the first name
-  @name = STDIN.gets.chomp
   # while the name is not empty, repeat this code
   while !@name.empty? do
+    # get the first name
+  @name = STDIN.gets.chomp
   # add the student hash to the array
-
   add_students_info_to_list
   puts "Now we have #{@students.count} students"
   # get another name from the user
-  @name = STDIN.gets.chomp
+
 end
   end
 
@@ -60,8 +59,8 @@ print_footer
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy
+  -------------"
 end
 
 def print_student_list
@@ -97,15 +96,18 @@ end
 file.close
 end
 
-def try_load_students
+def try_load_students(filename = "students.csv")
   filename = ARGV.first
-  return if filename.nil?
-  if File.exists?(filename)
+  if filename.nil?
+    filename = "students.csv"
     load_students
-    puts "Loaded #{@students.count} from #{filename}"
-  else
-    puts "Sorry #{filename} doesn't exist"
-    exit
+       puts "Loaded #{@students.count} from #{filename}"
+     elsif File.exists?(filename)
+      load_students
+       puts "Loaded #{@students.count} from #{filename}"
+     else
+       puts "Sorry #{filename} doesn't exist"
+       exit
   end
 end
 
