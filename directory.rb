@@ -101,15 +101,20 @@ end
 
 
 def load_students(filename = "students.csv")
-  file = File.open("students.csv" , "r")
-  file.readlines.each do |line|
+  puts "Which file would you like to load?"
+  filename = STDIN.gets.chomp
+  while !File.exist?(filename)
+    puts "Sorry that file does not exist - please re-enter a filename"
+    filename = STDIN.gets.chomp
+  end
+  File.open(filename , "r") do|readlines|
+  readlines.each do |line|
   @name, cohort = line.chomp.split(',')
   add_students_info_to_list
 end
-file.close
+end
 puts "The students list has been loaded"
 end
-
 
 
 def try_load_students(filename = ARGV.first)
