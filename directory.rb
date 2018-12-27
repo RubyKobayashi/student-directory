@@ -1,4 +1,5 @@
 @students = []
+require 'csv'
 
 def print_menu
   puts "1. Input the students"
@@ -80,6 +81,7 @@ end
 
 
 def save_students
+
   puts "Which file would you like to save to?"
   filename = STDIN.gets.chomp
   while !File.exists?(filename) do
@@ -87,16 +89,21 @@ def save_students
     filename = STDIN.gets.chomp
   end
   # open the file for writing
-  File.open(filename, "w") do |f|
-# iterate over the array of students
-    @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    f.puts csv_line
-    end
-  end
+  CSV.open(filename, "w") do |csv|
+ # iterate over the array of students
+     @students.each do |student|
+     student_data = [student[:name], student[:cohort]]
+      csv << student_data
+
+end
+end
+
+
   puts "The students you have inputted have been saved"
 end
+
+
+
 
 
 
@@ -107,14 +114,14 @@ def load_students(filename = "students.csv")
     puts "Sorry that file does not exist - please re-enter a filename"
     filename = STDIN.gets.chomp
   end
-  File.open(filename , "r") do|readlines|
-  readlines.each do |line|
-  @name, cohort = line.chomp.split(',')
-  add_students_info_to_list
+
+  CSV.foreach("students.csv") do |row|
+    @name, cohort = row.join(",").split(',')
+    add_students_info_to_list
+  end
+  puts "The students list has been loaded"
 end
-end
-puts "The students list has been loaded"
-end
+
 
 
 
@@ -131,4 +138,5 @@ end
 
 
 
+try_load_students
 interactive_menu
