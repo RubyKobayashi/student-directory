@@ -89,6 +89,7 @@ def save_students
   file.puts csv_line
 end
 file.close
+puts "The students you have inputted have been saved"
 end
 
 def load_students(filename = "students.csv")
@@ -98,6 +99,7 @@ def load_students(filename = "students.csv")
   add_students_info_to_list
 end
 file.close
+puts "The students list has been loaded"
 end
 
 def try_load_students(filename = ARGV.first)
