@@ -80,17 +80,25 @@ end
 
 
 def save_students
+  puts "Which file would you like to save to?"
+  filename = STDIN.gets.chomp
+  while !File.exists?(filename) do
+    puts 'Sorry that file does not exist - please re-enter a filename'
+    filename = STDIN.gets.chomp
+  end
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
 # iterate over the array of students
-@students.each do |student|
-  student_data = [student[:name], student[:cohort]]
-  csv_line = student_data.join(",")
-  file.puts csv_line
-end
+    @students.each do |student|
+    student_data = [student[:name], student[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+    end
 file.close
-puts "The students you have inputted have been saved"
+  puts "The students you have inputted have been saved"
 end
+
+
 
 def load_students(filename = "students.csv")
   file = File.open("students.csv" , "r")
@@ -101,6 +109,8 @@ end
 file.close
 puts "The students list has been loaded"
 end
+
+
 
 def try_load_students(filename = ARGV.first)
   if filename.nil?
