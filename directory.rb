@@ -87,14 +87,14 @@ def save_students
     filename = STDIN.gets.chomp
   end
   # open the file for writing
-  file = File.open(filename, "w")
+  File.open(filename, "w") do |f|
 # iterate over the array of students
     @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
-    file.puts csv_line
+    f.puts csv_line
     end
-file.close
+  end
   puts "The students you have inputted have been saved"
 end
 
@@ -117,6 +117,7 @@ puts "The students list has been loaded"
 end
 
 
+
 def try_load_students(filename = ARGV.first)
   if filename.nil?
     filename = "students.csv"
@@ -130,5 +131,4 @@ end
 
 
 
-try_load_students
 interactive_menu
